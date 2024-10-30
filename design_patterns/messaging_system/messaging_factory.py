@@ -8,8 +8,16 @@ class MessagingFactory(ABC):
     
     @abstractmethod
     def create_image_sender(self):
-        pass 
-    
+        pass
+
+    @staticmethod
+    def get_factory(factory_type: str) -> 'MessagingFactory':
+        if factory_type == "SMS":
+            return SMSFactory()
+        elif factory_type == "Email":
+            return EmailFactory()
+        else:
+            raise ValueError(f"Unsupported factory type: {factory_type}")
 
 class SMSFactory(MessagingFactory):
     def create_text_sender(self):

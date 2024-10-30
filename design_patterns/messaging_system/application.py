@@ -10,23 +10,12 @@ class Application():
         self.text_sender.send("David", TextContent("Hi David!"))
         self.image_sender.send("David", ImageContent("photo.jpg"))
         
-def get_factory(type) -> MessagingFactory:
-    
-    if type == "SMS":
-        return SMSFactory()
-    elif type == "Email":
-        return EmailFactory()
-    #elif os_name == "Linux":
-    #    return LinuxFactory()
-    else:
-        raise Exception(f"Unsupported type: {type}")
-    
 
 if __name__ == "__main__":
-    factory = get_factory("SMS")
+    factory = MessagingFactory.get_factory("SMS")
     app = Application(factory)
     app.run()
     print("=============================================================================================")
-    factory = get_factory("Email")
+    factory = MessagingFactory.get_factory("Email")
     app = Application(factory)
     app.run()
